@@ -16,6 +16,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(self.new_user.user_name,"John Doe")
         self.assertEqual(self.new_user.email,"pseudo@gmail.com")
         self.assertEqual(self.new_user.password,"")
+        
 
         
         
