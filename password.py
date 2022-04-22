@@ -8,11 +8,11 @@ class User:
     
     user_list = []
     
-    def __init__ (self, f_name, l_name, user_name, email,password):
+    def __init__ (self, f_name, l_name, u_name, email,password):
         
         self.f_name = f_name
         self.l_name = l_name
-        self.user_name = user_name
+        self.user_name = u_name
         self.email = email
         self.password = password
         
@@ -37,9 +37,9 @@ class User:
               
         
     @classmethod
-    def user_name_exists(cls,user_name):
+    def user_name_exists(cls,u_name):
         for user in cls.user_list:
-            if user.user_name == {string}:
+            if user.u_name == {string}:
                 return True
             return print("does not accept numbers/special characters")
        
