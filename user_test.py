@@ -16,7 +16,20 @@ class TestUser(unittest.TestCase):
         self.assertEqual(self.new_user.user_name,"John Doe")
         self.assertEqual(self.new_user.email,"pseudo@gmail.com")
         self.assertEqual(self.new_user.password,"")
-        
+    
+    def tearDown(self):
+        User.user_list =[]
+    
+    def test_save(self):
+        self.new_user.save_user()
+        self.assertEqual(len(User.user_list),1)
+    
+    def test_save_multiple_users(self):
+        self.new_user.save_user()
+        extra_user = User ("John", "Doe", "JohnDoe", "pseudo@gmail.com", "")   
+        extra_user.save_user()
+        self.assertEqual(len(User.user_list),2)
+              
 
         
         
