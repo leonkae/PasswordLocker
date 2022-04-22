@@ -5,8 +5,16 @@ import string
 class User:
     '''lets save user data'''
     
+    
     user_list = []
-    def __init__(self, user_name,email,password):
+    
+    def __init__ (self, f_name, l_name, user_name, email,password):
+        
+        self.f_name = f_name
+        self.l_name = l_name
+        self.user_name = user_name
+        self.email = email
+        self.password = password
         
         ''' creating user account'''
         
@@ -19,8 +27,10 @@ class User:
             if user_name == {string}:
                 return True
             return print("does not accept numbers/special characters")
+      
+      
         
-        
-        
+     
+
     
 
