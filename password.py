@@ -18,7 +18,7 @@ class User:
         
         ''' creating user account'''
         
-    def new_user_account (self):
+    def save_user (self):
         User.user_list.append(self)
         
     @classmethod
