@@ -47,6 +47,10 @@ class User:
     def copy_email(cls,email):
         email_found = User.find_by_email(email)
         pyperclip.copy(email_found)
+    
+    @classmethod
+    def enter_password(cls,password):
+        password   
      
       
       
