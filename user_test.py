@@ -29,6 +29,8 @@ class TestUser(unittest.TestCase):
         extra_user = User ("John", "Doe", "JohnDoe", "pseudo@gmail.com", "")   
         extra_user.save_user()
         self.assertEqual(len(User.user_list),2)
+    
+        
               
 
         
