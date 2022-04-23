@@ -8,7 +8,11 @@ from password import User
 
 # this will be our test site
 
+''' writing tests '''
+
 class TestUser(unittest.TestCase):
+    
+    '''test for new user'''
     
     def setUp(self):
         self.new_user = User("John","Doe","John Doe","pseudo@gmail.com","")
@@ -19,6 +23,8 @@ class TestUser(unittest.TestCase):
         self.assertEqual(self.new_user.u_name,"John Doe")
         self.assertEqual(self.new_user.email,"pseudo@gmail.com")
         self.assertEqual(self.new_user.password,"")
+        
+    '''test for user display'''
     
     def tearDown(self):
         User.user_list =[]
@@ -41,13 +47,12 @@ class TestUser(unittest.TestCase):
         self.assertTrue(email_exists)
         
         
-    # def test_copy_email(self):
-    #     self.new_user.save_user()
-    #     User.copy_email("pseudo@gmail.com")
-    #     self.assertEqual(self.new_user.email, pyperclip.paste)    
+    def test_copy_email(self):
+        self.new_user.save_user()
+        User.copy_email("pseudo@gmail.com")
+        self.assertEqual(self.new_user.email, pyperclip.paste)    
         
-        
-        
+
         
         
 if __name__== '__main__':
