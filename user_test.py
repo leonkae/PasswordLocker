@@ -49,7 +49,7 @@ class TestUser(unittest.TestCase):
         
         
     def test_user_exists(self):
-        
+        '''tests if user exists'''
         self.new_user.save_user()
         new_user = User("John", "Doe", "JohnDoe", "pseudo@gmail.com", "123john") 
         new_user.save_user()
@@ -64,12 +64,14 @@ class TestUser(unittest.TestCase):
         self.assertTrue(user1_is_logged)
         
     def test_new_user_login(self):
+        '''tests for new user login'''
         newuser = self.new_user.save_user()
         newuser_has_new_account = User.new_user_login("John","Doe","John Doe","pseudo@gmail.com","123john")
         
         self.assertTrue(newuser_has_new_account) 
         
     def test_show_user(self):
+        '''tests for display of object'''
         self.assertEqual(User.show_user(),User.user_list)     
         
 class Testcredentials(unittest.TestCase) :

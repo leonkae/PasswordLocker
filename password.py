@@ -65,6 +65,7 @@ class User:
     
     @classmethod
     def show_user(self):
+        print("this has user information")
         return self.user_list   
             
             
@@ -122,14 +123,19 @@ class Credentials():
         
         for credential in cls.Credentials_list:
             if credential.account == account:
+                print ("credential present")
                 return True
+        print ("credential absent")    
         return False 
     
     
     @classmethod
     def show_credentials(cls):
         '''shows credentials '''
-        return cls.Credentials_list           
+        print("these are user credentials")
+        return cls.Credentials_list  
+    
+            
         
      
             
