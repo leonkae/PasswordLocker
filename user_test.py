@@ -33,6 +33,7 @@ class TestUser(unittest.TestCase):
         User.user_list =[]
     
     def test_save(self):
+        '''tests addition of 1 user'''
         self.new_user.save_user()
         self.assertEqual(len(User.user_list),1)
     
@@ -46,6 +47,7 @@ class TestUser(unittest.TestCase):
         
         
     def test_user_exists(self):
+        
         self.new_user.save_user()
         new_user = User("John", "Doe", "JohnDoe", "pseudo@gmail.com", "123john") 
         new_user.save_user()
@@ -53,6 +55,7 @@ class TestUser(unittest.TestCase):
         self.assertTrue(email_exists)
         
     def test_user_login(self):
+        '''tests login logic'''
         user1 = self.new_user.save_user()
         user1_is_logged = User.user_login("pseudo@gmail.com","123john")
   
@@ -65,12 +68,26 @@ class TestUser(unittest.TestCase):
         self.assertTrue(newuser_has_new_account)  
         
     def test_check_user(self):
+        '''checks for user'''
         existing_user = self.new_user.save_user()
         existing_user_has_account = Credentials.check_user("John Doe","123john")
         
         self.assertTrue(existing_user_has_account)        
 
-            
+    def test_store_credentials(self): 
+        '''tests for credential storage'''
+        self.new_user.save_user()
+        account_user = Credentials("John Doe","pseudo@gmail.com" , "123john")
+        account_user.store_credentials()
+         
+        self.assertEqual(len(Credentials.Credentials_list),1) 
+         
+    def test_remove_credentials(self):
+        '''tests for credential removal'''
+        self.new_user.save_user()
+        self.assertEqual(len(Credentials.Credentials_list),0) 
+        
+        
         
     # def test_copy_email(self):
     #     self.new_user.save_user()

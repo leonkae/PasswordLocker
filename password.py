@@ -1,4 +1,5 @@
 from multiprocessing.dummy.connection import families
+from os import uname
 from django.urls import translate_url
 import pyperclip
 import string
@@ -78,10 +79,20 @@ class Credentials():
         
     
     
-    def __init__(self,account, password, u_name):
+    def __init__(self,u_name, email, password ):
         
+        '''defining credential terms'''
+        self.email = email
+        self.password = password
+        self.u_name = u_name
         
+    def store_credentials(self):
+        '''adding credetials to credentials_list''' 
+        Credentials.Credentials_list.append(self)
         
+    def remove_credentials(self):
+        '''removing credentials from credentials list'''
+        Credentials.Credentials_list.remove(self)     
      
             
         # if new_account:
@@ -100,7 +111,7 @@ class Credentials():
         
 
         
-        '''method that checks for string data type'''
+
         
     # @classmethod
     # def f_name_exists(cls,f_name):
