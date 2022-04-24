@@ -3,7 +3,7 @@
 import unittest
 
 import pyperclip
-from password import User
+from password import Credentials, User
 from password_run import save_user 
 
 
@@ -17,6 +17,7 @@ class TestUser(unittest.TestCase):
     
     def setUp(self):
         self.new_user = User("John","Doe","John Doe","pseudo@gmail.com","123john")
+        # self.user1 = User("John Doe", "pseudo@gmail.com", "123john")
         
     def test_init(self):
         self.assertEqual(self.new_user.f_name,"John")
@@ -57,11 +58,19 @@ class TestUser(unittest.TestCase):
   
         self.assertTrue(user1_is_logged)
         
-    def test_new_user_login(self) :
+    def test_new_user_login(self):
         newuser = self.new_user.save_user()
         newuser_has_new_account = User.new_user_login("John","Doe","John Doe","pseudo@gmail.com","123john")
         
         self.assertTrue(newuser_has_new_account)  
+        
+    def test_check_user(self):
+        existing_user = self.new_user.save_user()
+        existing_user_has_account = Credentials.check_user("John Doe","123john")
+        
+        self.assertTrue(existing_user_has_account)        
+
+            
         
     # def test_copy_email(self):
     #     self.new_user.save_user()
@@ -69,7 +78,7 @@ class TestUser(unittest.TestCase):
     #     # User.find_by_email("pseudo@gmail.com")
     #     self.assertEqual(self.new_user.email, pyperclip.paste)    
         
-
+ 
         
         
 if __name__== '__main__':

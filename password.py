@@ -1,8 +1,9 @@
 from multiprocessing.dummy.connection import families
+from django.urls import translate_url
 import pyperclip
 import string
 
-from sqlalchemy import false
+from sqlalchemy import false, true
 
 
 class User:
@@ -59,8 +60,29 @@ class User:
         print ("Check your details") 
         return False      
             
-                
-                
+            
+                          
+class Credentials():
+    ''' credential logic'''
+    
+    Credentials_list = []
+    @classmethod
+    def check_user(cls,u_name,password):
+        '''checks if user account exists'''
+        
+        new_user = "",""
+        for user in User.user_list:
+            if user.u_name == u_name and user.password == password:
+                return new_user
+        
+        
+    
+    
+    def __init__(self,account, password, u_name):
+        
+        
+        
+     
             
         # if new_account:
         #     print ("set up account")
