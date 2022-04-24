@@ -57,6 +57,12 @@ class TestUser(unittest.TestCase):
   
         self.assertTrue(user1_is_logged)
         
+    def test_new_user_login(self) :
+        newuser = self.new_user.save_user()
+        newuser_has_new_account = User.new_user_login("John","Doe","John Doe","pseudo@gmail.com","123john")
+        
+        self.assertTrue(newuser_has_new_account)  
+        
     # def test_copy_email(self):
     #     self.new_user.save_user()
     #     User.lookthrough_email("pseudo@gmail.com")
