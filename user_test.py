@@ -67,7 +67,10 @@ class TestUser(unittest.TestCase):
         newuser = self.new_user.save_user()
         newuser_has_new_account = User.new_user_login("John","Doe","John Doe","pseudo@gmail.com","123john")
         
-        self.assertTrue(newuser_has_new_account)  
+        self.assertTrue(newuser_has_new_account) 
+        
+    def test_show_user(self):
+        self.assertEqual(User.show_user(),User.user_list)     
         
 class Testcredentials(unittest.TestCase) :
     
@@ -116,7 +119,8 @@ class Testcredentials(unittest.TestCase) :
         
         self.assertTrue(credential_exists)
         
-        
+    def test_show_credentials(self):
+        self.assertEqual(Credentials.show_credentials(),Credentials.Credentials_list)
         
         
     # def test_copy_email(self):

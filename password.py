@@ -22,7 +22,9 @@ class User:
         self.password = password
         
         ''' user account info '''
+        
     # @classmethod    
+    
     def save_user (self):
         # check_user == user_exists
         has_account = self.check_user(self.email)
@@ -59,7 +61,11 @@ class User:
                 print ("User account created Successfully")
                 return True 
         print ("Check your details") 
-        return False      
+        return False   
+    
+    @classmethod
+    def show_user(self):
+        return self.user_list   
             
             
                           
@@ -117,7 +123,13 @@ class Credentials():
         for credential in cls.Credentials_list:
             if credential.account == account:
                 return True
-        return False            
+        return False 
+    
+    
+    @classmethod
+    def show_credentials(cls):
+        '''shows credentials '''
+        return cls.Credentials_list           
         
      
             
