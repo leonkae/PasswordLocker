@@ -1,9 +1,10 @@
 
-import email
+# import email
 import unittest
 
 import pyperclip
-from password import User 
+from password import User
+from password_run import save_user 
 
 
 # this will be our test site
@@ -15,18 +16,19 @@ class TestUser(unittest.TestCase):
     '''test for new user'''
     
     def setUp(self):
-        self.new_user = User("John","Doe","John Doe","pseudo@gmail.com","")
+        self.new_user = User("John","Doe","John Doe","pseudo@gmail.com","123john")
         
     def test_init(self):
         self.assertEqual(self.new_user.f_name,"John")
         self.assertEqual(self.new_user.l_name,"Doe")
         self.assertEqual(self.new_user.u_name,"John Doe")
         self.assertEqual(self.new_user.email,"pseudo@gmail.com")
-        self.assertEqual(self.new_user.password,"")
+        self.assertEqual(self.new_user.password,"123john")
         
     '''test for user display'''
     
     def tearDown(self):
+        ''' test for adding user '''
         User.user_list =[]
     
     def test_save(self):
@@ -34,23 +36,32 @@ class TestUser(unittest.TestCase):
         self.assertEqual(len(User.user_list),1)
     
     def test_save_multiple_users(self):
+        ''' test for adding multiple users '''
         self.new_user.save_user()
-        extra_user = User ("John", "Doe", "JohnDoe", "pseudo@gmail.com", "")   
+        extra_user = User ("John", "Doe", "JohnDoe", "seudo@gmail.com", "123john")   
         extra_user.save_user()
+        
         self.assertEqual(len(User.user_list),2)
         
-    def test_email_exists(self):
+        
+    def test_user_exists(self):
         self.new_user.save_user()
-        new_user = ("John", "Doe", "JohnDoe", "pseudo@gmail.com", "") 
+        new_user = User("John", "Doe", "JohnDoe", "pseudo@gmail.com", "123john") 
         new_user.save_user()
-        email_exists = User.email_exists("pseudo@gmail.com")
+        email_exists = User.check_user("pseudo@gmail.com")
         self.assertTrue(email_exists)
         
+    def test_user_login(self):
+        user1 = self.new_user.save_user()
+        user1_is_logged = User.user_login("pseudo@gmail.com","123john")
+  
+        self.assertTrue(user1_is_logged)
         
-    def test_copy_email(self):
-        self.new_user.save_user()
-        User.copy_email("pseudo@gmail.com")
-        self.assertEqual(self.new_user.email, pyperclip.paste)    
+    # def test_copy_email(self):
+    #     self.new_user.save_user()
+    #     User.lookthrough_email("pseudo@gmail.com")
+    #     # User.find_by_email("pseudo@gmail.com")
+    #     self.assertEqual(self.new_user.email, pyperclip.paste)    
         
 
         
