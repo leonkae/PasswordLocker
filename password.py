@@ -19,7 +19,7 @@ class User:
         self.email = email
         self.password = password
         
-        ''' creating user account'''
+        ''' user account info '''
     # @classmethod    
     def save_user (self):
         # check_user == user_exists
@@ -38,15 +38,26 @@ class User:
                 return True
         return False
     
-    
+    ''' login protocal for existing account'''
     @classmethod    
     def user_login(cls,email,password):
         for user in cls.user_list:
             if user.email == email and user.password == password: 
                 print("logged in Succesfully") 
                 return True
-        print ("wrong email or password, please try again.")
-        return False    
+        print ("Wrong email or password, please try again.")
+        return False 
+    
+    ''' new account creation protocal '''
+    
+    @classmethod
+    def new_user_login(cls,f_name,l_name,u_name,email,password):
+        for user in cls.user_list:
+            if user.f_name == f_name and user.l_name == l_name and user.u_name == u_name and user.email == email and user.password == password:
+                print ("User account created Successfully")
+                return True 
+        print ("Check your details") 
+        return False      
             
                 
                 
