@@ -1,6 +1,8 @@
 
 # import email
+from tabnanny import check
 import unittest
+from django.forms import SelectDateWidget
 
 import pyperclip
 from password import Credentials, User
@@ -67,25 +69,53 @@ class TestUser(unittest.TestCase):
         
         self.assertTrue(newuser_has_new_account)  
         
-    def test_check_user(self):
-        '''checks for user'''
-        existing_user = self.new_user.save_user()
-        existing_user_has_account = Credentials.check_user("John Doe","123john")
+class Testcredentials(unittest.TestCase) :
+    
+    '''tests for credentials'''
+    
+    def setUp(self):
+        self.new_credential = Credentials("john Doe" , "pseudo@gmail.com", "123John", "instagram")
         
-        self.assertTrue(existing_user_has_account)        
-
+    def test_init(self):
+         '''testing for credential initialising'''
+         self.assertEqual(self.new_credential.u_name,'john Doe')
+         self.assertEqual(self.new_credential.email,'pseudo@gmail.com')
+         self.assertEqual(self.new_credential.password, '123John')
+         self.assertEqual(self.new_credential.account,'instagram')
+              
+    
     def test_store_credentials(self): 
         '''tests for credential storage'''
-        self.new_user.save_user()
-        account_user = Credentials("John Doe","pseudo@gmail.com" , "123john")
-        account_user.store_credentials()
-         
-        self.assertEqual(len(Credentials.Credentials_list),1) 
+        self.new_credential.store_credentials()
+        self.assertEqual(len(Credentials.Credentials_list),6)
+
+        
          
     def test_remove_credentials(self):
         '''tests for credential removal'''
-        self.new_user.save_user()
-        self.assertEqual(len(Credentials.Credentials_list),0) 
+        self.new_credential.store_credentials()
+        self.assertEqual(len(Credentials.Credentials_list),5) 
+        
+        
+    def test_find_credential(self):
+        '''testing (find credential) method'''
+        self.new_credential.store_credentials()
+        credential_check = Credentials("john Doe" , "pseudo@gmail.com", "123John", "instagram")
+        credential_check.store_credentials()
+        
+        cred = Credentials.find_credential("instagram")
+        
+        self.assertEqual(credential_check.account,cred.account)
+        
+    def test_credential_present(self):
+        self.new_credential.store_credentials()
+        account_credential = Credentials("john Doe" , "pseudo@gmail.com", "123John", "instagram")
+        account_credential.store_credentials()
+        
+        credential_exists = Credentials.credential_present("instagram")
+        
+        self.assertTrue(credential_exists)
+        
         
         
         

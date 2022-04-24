@@ -79,20 +79,46 @@ class Credentials():
         
     
     
-    def __init__(self,u_name, email, password ):
+    def __init__(self,u_name, email, password,account ):
         
         '''defining credential terms'''
+        self.u_name = u_name
         self.email = email
         self.password = password
-        self.u_name = u_name
+        self.account = account
+        
+        
         
     def store_credentials(self):
-        '''adding credetials to credentials_list''' 
+        '''adding credetials to credentials_list (save)''' 
+        print("added ++")
         Credentials.Credentials_list.append(self)
         
+        
     def remove_credentials(self):
-        '''removing credentials from credentials list'''
+        '''removing credentials from credentials list (delete)'''
         Credentials.Credentials_list.remove(self)     
+    
+    @classmethod
+    def find_credential(cls, account):
+        '''this finds, specific accounts'''
+        
+    
+        for credential in cls.Credentials_list:
+            if credential.account == account:
+                print ("account present")
+                return credential
+            
+            
+    @classmethod
+    def credential_present(cls, account):
+        '''checks if credential is present'''
+        
+        for credential in cls.Credentials_list:
+            if credential.account == account:
+                return True
+        return False            
+        
      
             
         # if new_account:
