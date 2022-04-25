@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 
-
-import email
-from stat import UF_NODUMP
-from types import new_class
-
-from sqlalchemy import true
+from unicodedata import name
 from password import Credentials, User
 # user def starts here
 
@@ -16,7 +11,7 @@ def new_user_login(f_name, l_name,u_name, email,password):
 
 def save_user(user):
     '''save user'''
-    user.save_user()
+    return user.save_user()
     
 def check_user(email):
     '''check user'''
@@ -25,8 +20,13 @@ def check_user(email):
 
 def user_login(email, password):
     '''user login'''
-    the_user = User(email, password)
-    return "login success"
+    # the_user = User(email, password)
+    user=  User.user_login(email, password)
+    if not user:
+        username, password = ask_for_login_details()
+        return user_login(username, password)
+    return user
+    # return print("login success")
 
 def show_user(self):
     '''show user details'''
@@ -35,33 +35,74 @@ def show_user(self):
 def find_email(email):
     return User.find_by_email(email)
 
+def ask_for_login_details():
+    email = input("Enter email: ")
+    password = input("Enter password: ")
+    return [email, password]
 
 
 # credential defs  start here
 
 
-def store_credentials(self):
+def store_credentials(account, u_name, password):
     '''stores credentials'''
-    credential1 = Credentials.Credentials_list.append(self)
-    return credential1
+    # credential1 = Credentials.Credentials_list.append(self)
+    new_acount = Credentials(account,u_name,password)
+    account = new_acount.store_credentials()
+    if account:
+        print("Account created successfully!\n")
+        return account
+    
  
-def remove_credentials(self):
+def remove_credentials(user,account):
     '''removes credentials'''
-    credentials2 = Credentials.Credentials_list.remove(self)
-    return credentials2 
+    credentials = show_me_accounts()
+    for c in credentials:
+        if c.account == account:
+           print(f"{c.account} deleted successfully")
+           return credentials.remove(c)
+    # credentials = Credentials.Credentials_list
+    # for credential in credentials:
+    #     if credential.account == account:
+    #         print(credential)
+    #         # Credentials.Credentials_list.remove(account)
+    #         continue
+
+    # # credentials2 = Credentials.Credentials_list.remove(self)
+    # return show_credential() 
 
 def find_credential(account):
     '''finds credentials''' 
     Credentials3 = Credentials.Credentials_list(account)
     return Credentials3
 
-def show_credential (cls):
+def show_credential (user):
     '''show credential'''
-    return cls.Credentials.Credentials_list
+    credentials =  user.show_credential()
+    return credentials
+    # for credential in credentials:
+    #     print (credential)
+    # return
+
+
+def show_me_accounts ():
+    credentials = Credentials.show_credentials()
+    for credential in credentials:
+        print(credential.account)
+        print(credential.u_name)
+        print(credential.password)
+    return credentials
+    # account = account
+    # u_name = u_name
+    # password = password
+    # return [account, u_name, password]
+
+    
 
 
 def main():
     print("welcome, To PassWordLOcker enter password to continue")
+    print("To exit use: ex")
     
     '''login logic'''
     
@@ -76,67 +117,86 @@ def main():
     #     return print(f"welcome {user_name}, lets continue")
     # else:
     #     print ("wrong user")
+    user = None
     
     
     # '''Creation of new account'''
     # print(f"welcome {user_name}, lets continue")
-    # print('\n')
-    # print("use this short codes for navigation: \n cu-createuser, \n lgn - login if already have account, \n ex-exit on the appliction")
-    # short_code = input().lower()
-    # if short_code == 'cu':
-    #         print("No account no problem,lets make one ")
-            
-    #         print("New User")
-    #         print("First Name")
-    #         f_name = input()
-            
-    #         print("Last Name")
-    #         l_name = input()
-            
-    #         print("User Name")
-    #         u_name = input()
-            
-            
-    #         email = input("enter email")
-            
-    #         print ("password")
-    #         password = input()
-            
-    #         save_user(create_user(f_name,l_name,u_name,email,password))
-    #         print('\n')
-    #         print(f'Account {f_name}{l_name}{u_name}{email}{password} now exists')
-    # elif short_code == 'lgn':
+    print("Please create an account")
+    # print("New User")
+    # print("First Name")
+    f_name = input("Enter your first name: ")
+
+    l_name = input("Enter your last name: ")
+
+    # print("User Name")
+    u_name = f_name + l_name
+    print("Your username is: ", u_name)
+
+
+    email = input("enter email: ")
+
+    password = input("Enter password: ")
+
+    account_created = save_user(new_user_login(f_name,l_name,u_name,email,password))
+    if account_created:
         
-    #         print('Enter username:')
-    #         u_name = input()
+        print(f'\nAccount created successfully!')
+        email, password = ask_for_login_details()
+        # Login user with above username and password
+        new_user = user_login(email, password)
+        if new_user:
+         user = new_user
             
             
-    #         print('Enter password:')
-    #         password = input()
-    # while True:
-       
-    #     print('\n')
-    #     print('use short codes to navigate: \n ca -createAccount, \n dc - display_credentials , \n sc - show_specifc_credential, \n D - delete')
-       
         
-        
+   
+            
+    while True:
+        # print('\n')
+        # print("USE SHORT CODES FOR NAVIGATION: \n      >>cu-CreateUser, \n      >>lgn - login(if already have account), \n      >>ex-Exit on the appliction")
+        # short_code = input().lower()
+
+        # if not user:
+        # if short_code == 'cu':
+        # print("No account no problem,lets make one ")
+        # print(user)
+           
+                
+            
+                
+                
+        if user:
+            print('\nuse short codes to navigate: \n ca -createAccount, \n dc - display_credentials , \n D - delete\n')
+                
+            short_code = input("Select an action using the above shortcode: ")
+           
           
         
-    #     if short_code == 'ca':
-    #         print('enter account, eg instagram')
-            
-    #         print("Account")
-    #         account = input()
-    #     else:
-    #         print("Else statement running")
-    #     break
-             
-            
-        # elif short_code == 'ex':
-        #     print("come back soon dont be a stranger")
-        #     break 
+            if short_code == 'ca':
+                
+                account = input("\nEnter account name, eg Instagram: ")
+                u_name = input( "enter account user name:")
+                password = input ("enter accont email")
+                account = store_credentials(account, u_name, password)
+          
+            elif short_code == 'dc':
+                print("DC")
+                # show_credential = Credentials(u_name, password)
+                show_me_accounts()
+                
+            elif short_code == "D":
+                print("Delete")
+                account = input("Enter account to delete: ")
+                print("Account to delete: ", account)
+                remove_credentials(user, account)
+                
+            elif short_code == 'ex':
+                print("Exit")
+            else: 
+                print("Please select from above shortcode")
         # else:
-        #     print("Invalid, Please use shortcodes") 
+        #     print("Please create an account")
              
     '''interacting with credentials'''
     # while True:

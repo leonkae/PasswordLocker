@@ -22,7 +22,11 @@ class TestUser(unittest.TestCase):
         # self.user1 = User("John Doe", "pseudo@gmail.com", "123john")
         
     def test_init(self):
-        self.assertEqual(self.new_user.fdefword,"123john")
+        self.assertEqual(self.new_user.f_name,"John")
+        self.assertEqual(self.new_user.l_name,"Doe")
+        self.assertEqual(self.new_user.u_name,"John Doe")
+        self.assertEqual(self.new_user.email,"pseudo@gmail.com")
+        self.assertEqual(self.new_user.password,"123john")
         
     '''test for user display'''
     

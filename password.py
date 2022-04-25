@@ -48,7 +48,7 @@ class User:
         for user in cls.user_list:
             if user.email == email and user.password == password: 
                 print("logged in Succesfully") 
-                return True
+                return user
         print ("Wrong email or password, please try again.")
         return False 
     
@@ -86,25 +86,25 @@ class Credentials():
         
     
     
-    def __init__(self,u_name, email, password,account ):
+    def __init__(self,account, u_name, password ):
         
         '''defining credential terms'''
-        self.u_name = u_name
-        self.email = email
-        self.password = password
         self.account = account
+        self.u_name = u_name
+        self.password = password
+        # self.email = email
         
         
         
     def store_credentials(self):
         '''adding credetials to credentials_list (save)''' 
-        print("added ++")
         Credentials.Credentials_list.append(self)
-        return True
+        return self
         
         
     def remove_credentials(self):
         '''removing credentials from credentials list (delete)'''
+        
         Credentials.Credentials_list.remove(self)     
     
     @classmethod
