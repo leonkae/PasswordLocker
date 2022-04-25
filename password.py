@@ -100,6 +100,7 @@ class Credentials():
         '''adding credetials to credentials_list (save)''' 
         print("added ++")
         Credentials.Credentials_list.append(self)
+        return True
         
         
     def remove_credentials(self):
@@ -135,27 +136,11 @@ class Credentials():
         print("these are user credentials")
         return cls.Credentials_list  
     
-            
-        
-     
-            
-        # if new_account:
-        #     print ("set up account")
-        #     return True
-        # return False
     
-         # @classmethod
-         # def check_account (cls, account):
-         #     if account:
-         #         return True
-         #     return False
+    
+    
+    
             
-            
-        
-        
-
-        
-
         
     # @classmethod
     # def f_name_exists(cls,f_name):
