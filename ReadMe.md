@@ -1,9 +1,9 @@
-# PassWord Holder 
+# PassWord LOCKER 
 # Author
 Andre Leon Kaeulana
 # Description
 
-This project is designed to hold multiple user accounts as desired by the user.  
+This project is designed to hold multiple user accounts and their passwords as desired by the user.  
 
 # Setup and Usage
 ![navigation](images/newscreensho.jpg)
