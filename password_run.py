@@ -83,9 +83,12 @@ def show_me_accounts ():
         print(credential.password)
     return credentials
 
-
+def constructPassword():
+    '''
+    generates a random password for the user.
+    '''
+    return Credentials.constructPassword()
     
-
 
 def main():
     print("welcome, To PassWordLOcker enter password to continue")
@@ -112,7 +115,7 @@ def main():
     account_created = save_user(new_user_login(f_name,l_name,u_name,email,password))
     if account_created:
         
-        print(f'\nAccount created successfully!')
+        print(f'\nAccount created successfully! lets login..')
         email, password = ask_for_login_details()
         # Login user with above username and password
         new_user = user_login(email, password)
@@ -127,9 +130,9 @@ def main():
         
               
         if user:
-            print('\nuse short codes to navigate: \n ca -createAccount, \n dc - display_credentials , \n D - delete\n')
+            print('\nuse short codes to navigate: \n ca -createAccount, \n dc - display_credentials , \n D - delete\n ex - exit')
                 
-            short_code = input("Select an action using the above shortcode: ")
+            short_code = input("Select an action using the above shortcode: ").lower() .strip()
            
           
         
@@ -137,11 +140,24 @@ def main():
                 
                 account = input("\nEnter account name, eg Instagram: ")
                 u_name = input( "enter account user name:")
-                password = input ("enter accont email>>:")
+                
+                while True:
+                    print(" Select  P - enter own pasword:\n  AP -auto construct password")
+                     
+                    password = input("enter password >>:").lower().strip()
+                    
+                    if password == 'p':
+                        password = input("Enter Password\n")
+                        break
+                    elif password == 'ap':
+                        password = constructPassword()
+                        break
+                    else:
+                        print("oops select valid short code")
+                
                 account = store_credentials(account, u_name, password)
           
             elif short_code == 'dc':
-                print("DC")
                 # show_credential = Credentials(u_name, password)
                 show_me_accounts()
                 
@@ -152,7 +168,8 @@ def main():
                 remove_credentials(user, account)
                 
             elif short_code == 'ex':
-                print("Exit")
+                print("Goodbye,come back soon...")
+                break
             else: 
                 print("Please select from above shortcode")
         

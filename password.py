@@ -3,7 +3,7 @@ from os import uname
 from django.urls import translate_url
 import pyperclip
 import string
-
+import random
 from sqlalchemy import false, true
 
 
@@ -133,6 +133,12 @@ class Credentials():
     @classmethod
     def show_credentials(cls):
         '''shows credentials '''
-        print("these are user credentials")
+        print("Here are your accounts...")
+        print("\n")
         return cls.Credentials_list  
+    
+    def constructPassword(length=4):
+        """Generate a random password string of letters and digits and special characters"""
+        password = string.ascii_uppercase + string.ascii_lowercase + string.digits + "~!@#$%^&*``~-_=+\|][?"
+        return ''.join(random.choice(password) for i in range(length))
     
