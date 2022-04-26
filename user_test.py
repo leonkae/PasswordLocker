@@ -124,15 +124,6 @@ class Testcredentials(unittest.TestCase) :
     def test_show_credentials(self):
         self.assertEqual(Credentials.show_credentials(),Credentials.Credentials_list)
         
-        
-    # def test_copy_email(self):
-    #     self.new_user.save_user()
-    #     User.lookthrough_email("pseudo@gmail.com")
-    #     # User.find_by_email("pseudo@gmail.com")
-    #     self.assertEqual(self.new_user.email, pyperclip.paste)    
-        
- 
-        
-        
+                
 if __name__== '__main__':
     unittest.main()
