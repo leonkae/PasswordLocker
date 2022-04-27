@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from unicodedata import name
+# from unicodedata import name
 from password import Credentials, User
 # user def starts here
 
@@ -130,9 +130,9 @@ def main():
         
               
         if user:
-            print('\nuse short codes to navigate: \n ca -createAccount, \n dc - display_credentials , \n D - delete\n ex - exit')
+            print('\n use short codes to navigate: \n ca -createAccount, \n dc - display_credentials \n d - delete  \nex - exit' )
                 
-            short_code = input("Select an action using the above shortcode: ").lower() .strip()
+            short_code = input("Select an action using the above shortcode: ").lower().strip()
            
           
         
@@ -160,18 +160,24 @@ def main():
             elif short_code == 'dc':
                 # show_credential = Credentials(u_name, password)
                 show_me_accounts()
-                
-            elif short_code == "D":
-                print("Delete")
+            
+            elif short_code == 'd':
+                print("delete")  
                 account = input("Enter account to delete: ")
                 print("Account to delete>>: ", account)
-                remove_credentials(user, account)
+                remove_credentials(user, account)  
+                
+            # elif short_code == "D":
+            #     print("Delete")
+            #     account = input("Enter account to delete: ")
+            #     print("Account to delete>>: ", account)
+            #     remove_credentials(user, account)
                 
             elif short_code == 'ex':
                 print("Goodbye,come back soon...")
                 break
             else: 
-                print("Please select from above shortcode")
+                print("oops select valid short code")
         
              
  

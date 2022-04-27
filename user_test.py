@@ -1,10 +1,10 @@
 
 # import email
-from tabnanny import check
+# from tabnanny import check
 import unittest
-from django.forms import SelectDateWidget
+# from django.forms import SelectDateWidget
 
-import pyperclip
+# import pyperclip
 from password import Credentials, User
 from password_run import save_user 
 
@@ -79,7 +79,7 @@ class Testcredentials(unittest.TestCase) :
     '''tests for credentials'''
     
     def setUp(self):
-        self.new_credential = Credentials("john Doe" , "pseudo@gmail.com", "123John", "instagram")
+        self.new_credential = Credentials("john Doe" , "pseudo@gmail.com", "123John", "instagram",)
         
     def test_init(self):
          '''testing for credential initialising'''
